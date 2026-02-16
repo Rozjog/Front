@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+// Массив товаров
 let products = [
     { id: 1, title: 'Арбуз', price: 2000 },
     { id: 2, title: 'Печенье', price: 150 },
@@ -11,9 +12,11 @@ let products = [
 
 app.use(express.json());
 
+// Главная страница
 app.get('/', (req, res) => {
     res.send('Главная страница магазина');
 });
+
 
 app.post('/products', (req, res) => {
     const { title, price } = req.body;
@@ -28,10 +31,12 @@ app.post('/products', (req, res) => {
     res.status(201).json(newProduct);
 });
 
+// Все товары
 app.get('/products', (req, res) => {
     res.send(JSON.stringify(products));
 });
 
+// Один товар
 app.get('/products/:id', (req, res) => {
     let product = products.find(p => p.id == req.params.id);
     res.send(JSON.stringify(product));
@@ -47,6 +52,7 @@ app.patch('/products/:id', (req, res) => {
     res.json(product);
 });
 
+// Удаление товара
 app.delete('/products/:id', (req, res) => {
     products = products.filter(p => p.id != req.params.id);
     res.send('Ok');

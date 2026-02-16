@@ -1,3 +1,4 @@
+// переменные
 $primary-color: #3498db;
 $secondary-color: #2ecc71;
 $text-color: #333;
@@ -6,6 +7,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $border-radius: 8px;
 $border: 3px solid #c3ff00;
 
+// миксин для центрирования
 @mixin center-page {
   position: absolute;
   top: 50%;
@@ -13,6 +15,7 @@ $border: 3px solid #c3ff00;
   transform: translate(-50%, -50%);
 }
 
+// карточка
 .product-card {
   width: 300px;
   background: $light-color;
@@ -22,6 +25,7 @@ $border: 3px solid #c3ff00;
   border: $border;
   @include center-page;
 
+  // вложеность
   &__title {
     color: $text-color;
     padding-left: 5px;
