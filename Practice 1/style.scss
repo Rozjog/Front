@@ -1,0 +1,46 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #333;
+$light-color: #79ff79;
+$shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$border: 3px solid #c3ff00;
+
+@mixin center-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product-card {
+  width: 300px;
+  background: $light-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+  border: $border;
+  @include center-page;
+
+  &__title {
+    color: $text-color;
+    padding-left: 5px;
+    
+  }
+
+  &__img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__description{
+    padding-left : 5px;
+  }
+}
