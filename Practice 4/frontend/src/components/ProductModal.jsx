@@ -6,6 +6,7 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     if (!open) return;
@@ -14,6 +15,7 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
     setDescription(initialProduct?.description ?? "");
     setPrice(initialProduct?.price != null ? String(initialProduct.price) : "");
     setStock(initialProduct?.stock != null ? String(initialProduct.stock) : "");
+    setImage(initialProduct?.image ?? "");
   }, [open, initialProduct]);
 
   if (!open) return null;
@@ -22,13 +24,14 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const trimmedName = name.trim();
     const trimmedCategory = category.trim();
     const trimmedDescription = description.trim();
     const parsedPrice = Number(price);
     const parsedStock = Number(stock);
-    
+    const trimmedImage = image.trim();
+
     if (!trimmedName) {
       alert("Введите название товара");
       return;
@@ -49,7 +52,7 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
       alert("Введите корректное количество (целое число >= 0)");
       return;
     }
-    
+
     onSubmit({
       id: initialProduct?.id,
       name: trimmedName,
@@ -57,6 +60,7 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
       description: trimmedDescription,
       price: parsedPrice,
       stock: parsedStock,
+      image: trimmedImage
     });
   };
 
@@ -69,7 +73,7 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
             ✕
           </button>
         </div>
-        
+
         <form className="form" onSubmit={handleSubmit}>
           <label className="label">
             Название товара
@@ -126,6 +130,17 @@ export default function ProductModal({ open, mode, initialProduct, onClose, onSu
               />
             </label>
           </div>
+
+          <label className="label">
+            Ссылка на фото  
+            <input
+              className="input"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              placeholder=""
+            />
+          </label>  
+
 
           <div className="modal__footer">
             <button type="button" className="btn" onClick={onClose}>

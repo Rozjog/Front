@@ -23,16 +23,16 @@ app.use((req, res, next) => {
 
 // Данные спортивного магазина
 let products = [
-  { id: nanoid(6), name: 'Футбольный мяч', category: 'Футбол', description: 'Профессиональный мяч размер 5', price: 3500, stock: 25 },
-  { id: nanoid(6), name: 'Кроссовки для бега', category: 'Бег', description: 'Легкие кроссовки с амортизацией', price: 8500, stock: 15 },
-  { id: nanoid(6), name: 'Теннисная ракетка', category: 'Теннис', description: 'Карбоновая ракетка', price: 6200, stock: 8 },
-  { id: nanoid(6), name: 'Гантели 5 кг', category: 'Фитнес', description: 'Резиновые гантели, комплект 2 шт', price: 2800, stock: 30 },
-  { id: nanoid(6), name: 'Велосипед горный', category: 'Велоспорт', description: '26 дюймов, 21 скорость', price: 28500, stock: 5 },
-  { id: nanoid(6), name: 'Баскетбольный мяч', category: 'Баскетбол', description: 'Официальный размер 7', price: 3200, stock: 18 },
-  { id: nanoid(6), name: 'Коврик для йоги', category: 'Йога', description: 'Противоскользящий, 6 мм', price: 1900, stock: 22 },
-  { id: nanoid(6), name: 'Шлем для скейтборда', category: 'Скейтбординг', description: 'Регулируемый, защита от ударов', price: 4300, stock: 12 },
-  { id: nanoid(6), name: 'Лыжи беговые', category: 'Лыжи', description: 'Классические, длина 190 см', price: 8900, stock: 7 },
-  { id: nanoid(6), name: 'Скакалка', category: 'Фитнес', description: 'Скоростная, с подсчетом калорий', price: 650, stock: 40 }
+  { id: nanoid(6), name: 'Футбольный мяч', category: 'Футбол', description: 'Профессиональный мяч размер 5', price: 3500, stock: 25, image: '/images/ball.jpg'},
+  { id: nanoid(6), name: 'Кроссовки для бега', category: 'Бег', description: 'Легкие кроссовки с амортизацией', price: 8500, stock: 15, image: '/images/snikers.webp'},
+  { id: nanoid(6), name: 'Теннисная ракетка', category: 'Теннис', description: 'Карбоновая ракетка', price: 6200, stock: 8, image: '/images/tennis.webp' },
+  { id: nanoid(6), name: 'Гантели 5 кг', category: 'Фитнес', description: 'Резиновые гантели, комплект 2 шт', price: 2800, stock: 30, image: '/images/dumbbell.webp' },
+  { id: nanoid(6), name: 'Велосипед горный', category: 'Велоспорт', description: '26 дюймов, 21 скорость', price: 28500, stock: 5, image: '/images/bike.webp' },
+  { id: nanoid(6), name: 'Баскетбольный мяч', category: 'Баскетбол', description: 'Официальный размер 7', price: 3200, stock: 18, image: '/images/basketball.webp' },
+  { id: nanoid(6), name: 'Коврик для йоги', category: 'Йога', description: 'Противоскользящий, 6 мм', price: 1900, stock: 22, image: '/images/carpet.webp' },
+  { id: nanoid(6), name: 'Шлем для скейтборда', category: 'Скейтбординг', description: 'Регулируемый, защита от ударов', price: 4300, stock: 12, image: '/images/hat.jpg' },
+  { id: nanoid(6), name: 'Лыжи беговые', category: 'Лыжи', description: 'Классические, длина 190 см', price: 8900, stock: 7, image: '/images/ski.webp' },
+  { id: nanoid(6), name: 'Скакалка', category: 'Фитнес', description: 'Скоростная, с подсчетом калорий', price: 650, stock: 40, image: '/images/jumprope.webp' }
 ];
 
 // Swagger настройки
@@ -150,14 +150,15 @@ function findProductOr404(id, res) {
  *               $ref: '#/components/schemas/Product'
  */
 app.post("/api/products", (req, res) => {
-  const { name, category, description, price, stock } = req.body;
+  const { name, category, description, price, stock, image } = req.body;
   const newProduct = {
     id: nanoid(6),
     name: name.trim(),
     category: category.trim(),
     description: description?.trim() || '',
     price: Number(price),
-    stock: Number(stock)
+    stock: Number(stock),
+    image: image
   };
   products.push(newProduct);
   res.status(201).json(newProduct);
@@ -264,12 +265,13 @@ app.patch("/api/products/:id", (req, res) => {
     return res.status(400).json({ error: "Нет данных для обновления" });
   }
 
-  const { name, category, description, price, stock } = req.body;
+  const { name, category, description, price, stock, image } = req.body;
   if (name !== undefined) product.name = name.trim();
   if (category !== undefined) product.category = category.trim();
   if (description !== undefined) product.description = description.trim();
   if (price !== undefined) product.price = Number(price);
   if (stock !== undefined) product.stock = Number(stock);
+  if (image !== undefined) product.image = image;
 
   res.json(product);
 });

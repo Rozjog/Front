@@ -10,7 +10,20 @@ export default function ProductItem({ product, onEdit, onDelete }) {
         <div className="productPrice">{product.price.toLocaleString()} ₽</div>
         <div className="productStock">Осталось: {product.stock} шт.</div>
         <div className="productDescription">{product.description}</div>
+        {product.image && (
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{
+              width: '100px',
+              height: '100px',
+              objectFit: 'cover',
+              borderRadius: '8px'
+            }}
+          />
+        )}
       </div>
+
       <div className="productActions">
         <button className="btn" onClick={() => onEdit(product)}>
           Редактировать
