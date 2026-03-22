@@ -1,15 +1,9 @@
-import React from "react";
+import { Link } from 'react-router-dom';
 
-export default function ProductItem({ product, onEdit, onDelete }) {
+export default function ProductItem({ product, onEdit, onDelete, canEdit, canDelete }) {
   return (
     <div className="productRow">
       <div className="productMain">
-        <div className="productId">#{product.id}</div>
-        <div className="productName">{product.name}</div>
-        <div className="productCategory">{product.category}</div>
-        <div className="productPrice">{product.price.toLocaleString()} ₽</div>
-        <div className="productStock">Осталось: {product.stock} шт.</div>
-        <div className="productDescription">{product.description}</div>
         {product.image && (
           <img
             src={product.image}
@@ -22,15 +16,35 @@ export default function ProductItem({ product, onEdit, onDelete }) {
             }}
           />
         )}
+        
+        <div className="productInfo">
+          <div className="productId">#{product.id}</div>
+          <Link 
+            to={`/products/${product.id}`} 
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <div className="productName" style={{ cursor: 'pointer', color: '#4ade80' }}>
+              {product.name} →
+            </div>
+          </Link>
+          <div className="productCategory">{product.category}</div>
+          <div className="productPrice">{product.price?.toLocaleString()} ₽</div>
+          <div className="productStock">Осталось: {product.stock} шт.</div>
+          <div className="productDescription">{product.description?.substring(0, 100)}...</div>
+        </div>
       </div>
 
       <div className="productActions">
-        <button className="btn" onClick={() => onEdit(product)}>
-          Редактировать
-        </button>
-        <button className="btn btn--danger" onClick={() => onDelete(product.id)}>
-          Удалить
-        </button>
+        {canEdit && (
+          <button className="btn" onClick={() => onEdit(product)}>
+            Редактировать
+          </button>
+        )}
+        {canDelete && (
+          <button className="btn btn--danger" onClick={() => onDelete(product.id)}>
+            Удалить
+          </button>
+        )}
       </div>
     </div>
   );
