@@ -3,6 +3,10 @@
 
 # Видео по 2 контрольной работе
 [🎥 Смотреть видео-демонстрацию](https://github.com/Rozjog/Front/blob/main/kr2.mp4)
+<video width="100%" controls>
+  <source src="https://raw.githubusercontent.com/Rozjog/Front/main/kr2.mp4" type="video/mp4">
+  Ваш браузер не поддерживает видео. <a href="https://github.com/Rozjog/Front/blob/main/kr2.mp4">Скачать видео</a>
+</video>
 
 
 ## О проекте
