@@ -31,3 +31,5 @@ DELETE /api/users/:id (удаление)
 
 ## Тестовые аккаунты
 Администратор: admin@mail.com / admin123. Продавец: seller@mail.com / seller123. Пользователь: user@mail.com / user123.
+
+<video src="https://github.com/username/repo/raw/main/demo.mp4" controls width="100%"></video>
