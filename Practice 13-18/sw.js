@@ -67,7 +67,7 @@ self.addEventListener('push', (event) => {
     const options = {
         body: data.body,
         icon: '/icons/favicon-128x128.png',
-        badge: '/icons/favicon-48x48.png',
+        badge: '/icons/favicon-32x32.png',
         data: { reminderId: data.reminderId } // для идентификации в click
     };
     // Добавляем кнопку только если это напоминание
